@@ -13,5 +13,10 @@ class MealsBuilder {
         return MealListVC(vm: vm)
     }
     
-    //func buildMealDetailsVC() -> MealDe
+    func buildMealDetailsVC(with meal: Meal) -> MealDetailsVC {
+        let apiManager = APIManager()
+        let apiService = MealDetailsService(apiManager: apiManager)
+        let vm = MealDetailsVM(apiService: apiService, meal: meal)
+        return MealDetailsVC(vm: vm)
+    }
 }

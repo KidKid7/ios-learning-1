@@ -32,6 +32,4 @@ extension UICollectionView {
                                                 withReuseIdentifier: T.reuseIdentifier,
                                                 for: indexPath) as! T
     }
-    
-    
 }

@@ -8,7 +8,19 @@
 import UIKit
 
 extension UIViewController {
-    class func identifier() -> String {
+    static var identifier: String {
         return "\(self)"
     }
+    
+    var topSafeAreaHeight: CGFloat {
+        let window = UIApplication.shared.windows.first
+        return window?.safeAreaInsets.top ?? 0
+    }
+    
+    var bottomSafeAreaHeight: CGFloat {
+        let window = UIApplication.shared.windows.first
+        return window?.safeAreaInsets.bottom ?? 0
+    }
 }
+
+

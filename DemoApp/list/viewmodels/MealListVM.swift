@@ -39,7 +39,7 @@ extension MealListVM: MealListManaging {
     var sectionTitles: [String] {
         return groupedMeals.keys.sorted()
     }
-    
+
     func meals(inSection section: Int) -> [Meal] {
         let key = sectionTitles[section]
         return groupedMeals[key] ?? []

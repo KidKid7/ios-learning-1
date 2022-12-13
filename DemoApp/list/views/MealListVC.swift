@@ -16,7 +16,7 @@ class MealListVC: UIViewController {
     private var vm: MealListManaging!
     
     init(vm: MealListManaging) {
-        super.init(nibName: MealListVC.identifier(), bundle: nil)
+        super.init(nibName: MealListVC.identifier, bundle: nil)
         self.vm = vm
     }
     
@@ -57,7 +57,8 @@ private extension MealListVC {
     func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .systemOrange
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.backButtonTitle = ""
     }
     
     func setupCollectioView() {
@@ -128,7 +129,6 @@ extension MealListVC: UICollectionViewDataSource {
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         let vm = MealListHeaderVM(title: vm.sectionTitles[indexPath.section])
-        
         let header = collectionView.dequeueHeaderView(header: MealListSectionHeaderView.self, for: indexPath)
         header.setupData(vm: vm)
         return header
@@ -138,6 +138,8 @@ extension MealListVC: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegate
 extension MealListVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let selectedMeal = vm.meals(inSection: indexPath.section)[indexPath.row]
+        let vc = MealsBuilder().buildMealDetailsVC(with: selectedMeal)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

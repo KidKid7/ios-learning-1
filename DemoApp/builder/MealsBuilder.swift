@@ -8,7 +8,7 @@
 class MealsBuilder {
     func buildMealListVC() -> MealListVC {
         let apiManager = APIManager()
-        let apiService = MealListService(apiManager: apiManager)
+        let apiService = MealListService(apiManager: apiManager, category: "Dessert")
         let vm = MealListVM(apiService: apiService)
         return MealListVC(vm: vm)
     }

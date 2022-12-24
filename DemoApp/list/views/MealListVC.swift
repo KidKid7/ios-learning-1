@@ -10,7 +10,11 @@ import Combine
 
 class MealListVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorHeightConstraint: NSLayoutConstraint!
     
+    private let refreshControl = UIRefreshControl()
     private let input: PassthroughSubject<MealListVM.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     private var vm: MealListManaging!
@@ -36,13 +40,35 @@ class MealListVC: UIViewController {
         let output = vm.transform(input: input.eraseToAnyPublisher())
         output.receive(on: DispatchQueue.main)
             .sink { [weak self] event in
-            switch event {
-            case .loadMealsDidSucceed:
-                self?.collectionView.reloadData()
-            case .loadMealsDidFail(let error):
-                debugPrint(error)
-            }
-        }.store(in: &cancellables)
+                self?.refreshControl.endRefreshing()
+                switch event {
+                case .loadMealsDidSucceed:
+                    self?.collectionView.reloadData()
+                    self?.hideError()
+                case .loadMealsDidFail(let error):
+                    self?.showError(error)
+                }
+            }.store(in: &cancellables)
+    }
+    
+    private func showError(_ error: Error) {
+        UIView.animate(withDuration: 0.3, delay: 0) {
+            self.errorLabel.text = error.localizedDescription
+            self.errorView.alpha = 1
+            self.errorHeightConstraint.constant = 45
+        }
+    }
+    
+    private func hideError() {
+        UIView.animate(withDuration: 0.3, delay: 0) {
+            self.errorLabel.text = ""
+            self.errorView.alpha = 0
+            self.errorHeightConstraint.constant = 0
+        }
+    }
+    
+    @objc private func pullToRefresh() {
+        input.send(.refresh)
     }
 }
 
@@ -52,6 +78,7 @@ private extension MealListVC {
         title = "Dessert"
         setupNavigationBar()
         setupCollectioView()
+        hideError()
     }
     
     func setupNavigationBar() {
@@ -62,6 +89,8 @@ private extension MealListVC {
     }
     
     func setupCollectioView() {
+        refreshControl.addTarget(self, action: #selector(self.pullToRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         collectionView.register(nibCell: MealListCell.self)
         collectionView.register(header: MealListSectionHeaderView.self)
         

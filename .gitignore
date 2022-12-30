@@ -2,4 +2,6 @@
 .DS_Store
 
 ## User settings
-xcuserdata/
+DemoApp.xcodeproj/xcuserdata/*
+DemoApp.xcodeproj/project.xcworkspace/xcuserdata/*
+

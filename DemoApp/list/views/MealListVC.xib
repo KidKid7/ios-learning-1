@@ -11,6 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MealListVC" customModule="DemoApp" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="Ud4-p4-Lhu" id="8Fk-No-miN"/>
+                <outlet property="errorHeightConstraint" destination="HpZ-Nb-SW7" id="6Po-cC-Ukx"/>
+                <outlet property="errorLabel" destination="XIA-2q-l9Z" id="frT-6r-PNv"/>
+                <outlet property="errorView" destination="TOI-Kr-70c" id="JXL-eG-UM7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,8 +22,27 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOI-Kr-70c" userLabel="Error View">
+                    <rect key="frame" x="0.0" y="59" width="393" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIA-2q-l9Z">
+                            <rect key="frame" x="20" y="5" width="353" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.91976243257522583" green="0.3024027571391395" blue="0.038951867231431327" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="HpZ-Nb-SW7"/>
+                        <constraint firstAttribute="bottom" secondItem="XIA-2q-l9Z" secondAttribute="bottom" constant="5" id="IRA-GV-UGD"/>
+                        <constraint firstItem="XIA-2q-l9Z" firstAttribute="top" secondItem="TOI-Kr-70c" secondAttribute="top" constant="5" id="Vr4-Go-8Za"/>
+                        <constraint firstItem="XIA-2q-l9Z" firstAttribute="leading" secondItem="TOI-Kr-70c" secondAttribute="leading" constant="20" id="s3T-wm-eo9"/>
+                        <constraint firstAttribute="trailing" secondItem="XIA-2q-l9Z" secondAttribute="trailing" constant="20" id="tYF-Sw-QJH"/>
+                    </constraints>
+                </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-p4-Lhu">
-                    <rect key="frame" x="0.0" y="69" width="393" height="783"/>
+                    <rect key="frame" x="0.0" y="114" width="393" height="738"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LYO-ec-zDQ">
                         <size key="itemSize" width="128" height="128"/>
@@ -37,12 +59,15 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Ud4-p4-Lhu" firstAttribute="top" secondItem="TOI-Kr-70c" secondAttribute="bottom" constant="10" id="57V-DW-uCo"/>
                 <constraint firstItem="Ud4-p4-Lhu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="I6t-fe-Cee"/>
-                <constraint firstItem="Ud4-p4-Lhu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="b4Y-kI-gfi"/>
+                <constraint firstItem="TOI-Kr-70c" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dmg-2x-fjp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ud4-p4-Lhu" secondAttribute="trailing" id="ehV-6K-r6y"/>
                 <constraint firstAttribute="bottom" secondItem="Ud4-p4-Lhu" secondAttribute="bottom" id="h4V-n9-BzQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TOI-Kr-70c" secondAttribute="trailing" id="mYT-RS-DRA"/>
+                <constraint firstItem="TOI-Kr-70c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ohw-VX-Qzq"/>
             </constraints>
-            <point key="canvasLocation" x="155" y="15"/>
+            <point key="canvasLocation" x="154.96183206106869" y="14.788732394366198"/>
         </view>
     </objects>
 </document>

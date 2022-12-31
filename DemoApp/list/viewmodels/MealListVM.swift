@@ -26,7 +26,7 @@ class MealListVM {
     }
     
     private var meals: [Meal] = []
-    private var apiService: MealListServing!
+    private let apiService: MealListServing
     private var output: PassthroughSubject<Output, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     

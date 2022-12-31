@@ -13,12 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         debugPrint("2. willConnectTo")
-        
-        let vc = MealsBuilder().buildMealListVC()
-        let navVC = UINavigationController(rootViewController: vc)
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = navVC
+        
+        if NSClassFromString("XCTestCase") != nil {
+            window?.rootViewController = UIViewController()
+            
+        } else {
+            let vc = MealsBuilder().buildMealListVC()
+            let navVC = UINavigationController(rootViewController: vc)
+            window?.rootViewController = navVC
+        }
+        
         window?.makeKeyAndVisible()
     }
 
